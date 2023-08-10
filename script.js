@@ -1,8 +1,8 @@
-let submitbtn = document.getElementById("submit-btn");
 let timeEl = document.getElementById("time-left");
 const startButton = document.getElementById("start-btn");
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
+let results = document.getElementById("results");
 
 const questions = [
   {
@@ -97,9 +97,12 @@ function nextQuestion() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
     currentQuestion = questions[currentQuestionIndex].question;
-  currentAnswers = questions[currentQuestionIndex].answers;
-  correctAnswerValue = questions[currentQuestionIndex].correctAnswer;
+    currentAnswers = questions[currentQuestionIndex].answers;
+    correctAnswerValue = questions[currentQuestionIndex].correctAnswer;
     showQuestionsAndAnswers();
+  }
+  if (currentQuestionIndex === questions.length) {
+    endQuiz();
   }
 }
 
@@ -109,6 +112,8 @@ function endQuiz() {
   document.getElementById("answers").style.display = "none";
   document.getElementById("timer").style.display = "none";
   document.getElementById("results").style.display = "block";
+  document.getElementById("score").style.display = "block";
+
 
   let initials = prompt("Enter your name:");
   document.getElementById("name").innerHTML = "Name: " + initials;
